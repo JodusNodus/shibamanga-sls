@@ -3,4 +3,5 @@ node_modules/
 .tmp
 .gitattributes
 .serverless
+.webpack
 npm-debug.log
