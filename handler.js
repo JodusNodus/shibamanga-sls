@@ -1,7 +1,3 @@
-if (!global._babelPolyfill) {
-  require("babel-polyfill");
-}
-
 const Handler = require("./lib/Handler");
 const MangaPanda = require("./lib/sources/MangaPanda");
 const MangaReader = require("./lib/sources/MangaReader");

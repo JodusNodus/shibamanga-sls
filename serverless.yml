@@ -154,3 +154,6 @@ functions:
 #       Value: "Some output value"
 plugins:
   - serverless-webpack
+
+custom:
+  webpackIncludeModules: true # enable auto-packing of external modules

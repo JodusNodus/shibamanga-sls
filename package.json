@@ -4,10 +4,12 @@
   "description": "",
   "main": "handler.js",
   "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "bluebird": "^3.5.0",
     "cheerio": "^0.22.0",
     "moment": "^2.17.1",
     "request": "^2.80.0",
-    "request-promise-native": "^1.0.3"
+    "request-promise": "^4.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
@@ -19,9 +21,9 @@
     "eslint": "^3.17.0",
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "^2.2.0",
-    "moment": "^2.17.1",
     "serverless": "^1.8.0",
-    "webpack": "^2.2.1",
+    "serverless-webpack": "^1.0.0-rc.4",
+    "webpack": "^1.14.0",
     "webpack-node-externals": "^1.5.4"
   },
   "scripts": {
