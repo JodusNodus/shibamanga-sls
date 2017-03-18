@@ -25,6 +25,18 @@ provider:
 # you can define service wide environment variables here
 
 functions:
+  mangaupdatesList:
+    handler: handler.mangaupdates-list
+    timeout: 300
+    events:
+      - http:
+          method: get
+          path: sources/mangaupdates/list
+          request:
+            parameters:
+              querystrings:
+                index: true
+                length: true
   1mangapandaList:
     handler: handler.mangapanda-list
     timeout: 300
