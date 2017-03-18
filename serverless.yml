@@ -1,0 +1,156 @@
+service: sources
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+  region: eu-central-1
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+
+functions:
+  1mangapandaList:
+    handler: handler.mangapanda-list
+    timeout: 300
+    events:
+      - http:
+          method: get
+          path: sources/mangapanda/list
+  2mangapandaChapterList:
+    handler: handler.mangapanda-chapterList
+    timeout: 12
+    events:
+      - http:
+          method: get
+          path: sources/mangapanda/manga/{mangaalias}
+          request:
+            parameters:
+              paths:
+                mangaalias: true
+  3mangapandaChapter:
+    handler: handler.mangapanda-chapter
+    timeout: 30
+    events:
+      - http:
+          method: get
+          path: sources/mangapanda/manga/{mangaalias}/{chapteralias}
+          request:
+            parameters:
+              paths:
+                mangaalias: true
+                chapteralias: true
+  4mangapandaReleases:
+    handler: handler.mangapanda-releases
+    timeout: 30
+    events:
+      - http:
+          method: get
+          path: sources/mangapanda/releases
+  1mangareaderList:
+    handler: handler.mangareader-list
+    timeout: 300
+    events:
+      - http:
+          method: get
+          path: sources/mangareader/list
+  2mangareaderChapterList:
+    handler: handler.mangareader-chapterList
+    timeout: 12
+    events:
+      - http:
+          method: get
+          path: sources/mangareader/manga/{mangaalias}
+          request:
+            parameters:
+              paths:
+                mangaalias: true
+  3mangareaderChapter:
+    handler: handler.mangareader-chapter
+    timeout: 30
+    events:
+      - http:
+          method: get
+          path: sources/mangareader/manga/{mangaalias}/{chapteralias}
+          request:
+            parameters:
+              paths:
+                mangaalias: true
+                chapteralias: true
+  4mangareaderReleases:
+    handler: handler.mangareader-releases
+    timeout: 30
+    events:
+      - http:
+          method: get
+          path: sources/mangareader/releases
+  1mangaedenList:
+    handler: handler.mangaeden-list
+    timeout: 300
+    events:
+      - http:
+          method: get
+          path: sources/mangaeden/list
+  2mangaedenChapterList:
+    handler: handler.mangaeden-chapterList
+    timeout: 12
+    events:
+      - http:
+          method: get
+          path: sources/mangaeden/manga/{mangaalias}
+          request:
+            parameters:
+              paths:
+                mangaalias: true
+  3mangaedenChapter:
+    handler: handler.mangaeden-chapter
+    timeout: 30
+    events:
+      - http:
+          method: get
+          path: sources/mangaeden/manga/{mangaalias}/{chapteralias}
+          request:
+            parameters:
+              paths:
+                mangaalias: true
+                chapteralias: true
+  4mangaedenReleases:
+    handler: handler.mangaeden-releases
+    timeout: 30
+    events:
+      - http:
+          method: get
+          path: sources/mangaeden/releases
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"
+plugins:
+  - serverless-webpack
