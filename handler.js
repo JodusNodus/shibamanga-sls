@@ -1,21 +1,20 @@
-const Handler = require("./lib/Handler");
-const MangaPanda = require("./lib/sources/MangaPanda");
-const MangaReader = require("./lib/sources/MangaReader");
-const MangaEden = require("./lib/sources/MangaEden");
-const MangaUpdates = require("./lib/sources/MangaUpdates");
+const updateMangas = require("./lib/updater/mangas");
+const updateMangasources = require("./lib/updater/mangasources");
+const updateReleases = require("./lib/updater/releases");
 
-const handlers = [
-  new Handler("mangapanda", new MangaPanda()),
-  new Handler("mangareader", new MangaReader()),
-  new Handler("mangaeden", new MangaEden()),
-];
-
-const mangaupdates = new MangaUpdates();
+const handlerFactory = f =>
+  (e, ctx, cb) => {
+    f()
+      .then(() => {
+        cb();
+      })
+      .catch((err) => {
+        cb(err);
+      });
+  };
 
 module.exports = {
-  "mangaupdates-list": mangaupdates.list,
+  updateMangas: handlerFactory(updateMangas),
+  updateMangasources: handlerFactory(updateMangasources),
+  updateReleases: handlerFactory(updateReleases),
 };
-
-handlers.forEach((handler) => {
-  Object.assign(module.exports, handler.getPrefixedFuncs());
-});
