@@ -6,7 +6,7 @@ provider:
   stage: dev
   region: eu-central-1
   environment:
-    ELASTICSEACH_HOST: search-shibamanga-cajawfcxg7o3ay5rr4kzh43h4m.eu-central-1.es.amazonaws.com
+    ELASTICSEACH_HOST: url
     ELASTICSEACH_INDEX: shibamanga
 
 functions:
