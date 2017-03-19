@@ -1,4 +1,4 @@
-service: sources
+service: shibamanga
 
 provider:
   name: aws
@@ -9,6 +9,95 @@ provider:
     elasticsearch: search-shibamanga-cajawfcxg7o3ay5rr4kzh43h4m.eu-central-1.es.amazonaws.com
 
 functions:
+  getManga:
+    handler: handler.getManga
+    events:
+      - http:
+          path: api/manga/{mangaid}
+          method: get
+          request:
+            parameters:
+              querystrings:
+                source: true
+  getChapter:
+    handler: handler.getChapter
+    events:
+      - http:
+          path: api/manga/{mangaid}/{chapternum}
+          method: get
+          request:
+            parameters:
+              querystrings:
+                source: true
+  searchMangas:
+    handler: handler.searchMangas
+    events:
+      - http:
+          path: api/search
+          method: get
+          request:
+            parameters:
+              querystrings:
+                page: true
+                length: true
+                query: true
+  getRecommendations:
+    handler: handler.getRecommendations
+    events:
+      - http:
+          path: api/recommendations
+          method: get
+          request:
+            parameters:
+              querystrings:
+                page: true
+                length: true
+  getReleases:
+    handler: handler.getReleases
+    events:
+      - http:
+          path: api/releases
+          method: get
+          request:
+            parameters:
+              querystrings:
+                page: true
+                length: true
+  getPopular:
+    handler: handler.getPopular
+    events:
+      - http:
+          path: api/popular
+          method: get
+          request:
+            parameters:
+              querystrings:
+                page: true
+                length: true
+                not_ids: true
+  getList:
+    handler: handler.getList
+    events:
+      - http:
+          path: api/list
+          method: get
+          request:
+            parameters:
+              querystrings:
+                ids: true
+  getGenre:
+    handler: handler.getGenre
+    events:
+      - http:
+          path: api/genre
+          method: get
+          request:
+            parameters:
+              querystrings:
+                genre: true
+                page: true
+                length: true
+                not_ids: true
   updateMangas:
     handler: handler.updateMangas
     events:
