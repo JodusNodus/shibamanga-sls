@@ -27,6 +27,9 @@ const handlerFactory = f =>
       .then((data) => {
         cb(null, {
           statusCode: 200,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
           body: JSON.stringify(data),
         });
       })
