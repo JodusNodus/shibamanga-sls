@@ -6,11 +6,11 @@ provider:
   stage: dev
   region: eu-central-1
   environment:
-    ELASTICSEACH_HOST: url
+    ELASTICSEACH_HOST: ${env:ELASTICSEACH_HOST}
     ELASTICSEACH_INDEX: shibamanga
 
 functions:
-  getManga:
+  1getManga:
     handler: handler.getManga
     events:
       - http:
@@ -20,7 +20,7 @@ functions:
             parameters:
               querystrings:
                 source: true
-  getChapter:
+  2getChapter:
     handler: handler.getChapter
     events:
       - http:
@@ -30,7 +30,7 @@ functions:
             parameters:
               querystrings:
                 source: true
-  searchMangas:
+  3searchMangas:
     handler: handler.searchMangas
     events:
       - http:
@@ -42,7 +42,7 @@ functions:
                 page: true
                 length: true
                 query: true
-  getRecommendations:
+  4getRecommendations:
     handler: handler.getRecommendations
     events:
       - http:
@@ -53,7 +53,7 @@ functions:
               querystrings:
                 page: true
                 length: true
-  getReleases:
+  5getReleases:
     handler: handler.getReleases
     events:
       - http:
@@ -64,7 +64,7 @@ functions:
               querystrings:
                 page: true
                 length: true
-  getPopular:
+  6getPopular:
     handler: handler.getPopular
     events:
       - http:
@@ -76,7 +76,7 @@ functions:
                 page: true
                 length: true
                 not_ids: true
-  getList:
+  7getList:
     handler: handler.getList
     events:
       - http:
@@ -86,7 +86,7 @@ functions:
             parameters:
               querystrings:
                 ids: true
-  getGenre:
+  8getGenre:
     handler: handler.getGenre
     events:
       - http:
@@ -99,17 +99,17 @@ functions:
                 page: true
                 length: true
                 not_ids: true
-  updateMangas:
+  9updateMangas:
     handler: handler.updateMangas
     events:
       - http:
           path: updater/mangas
           method: get
-  updateMangasources:
+  10updateMangasources:
     handler: handler.updateMangasources
     events:
       - schedule: rate(1 day)
-  updateReleases:
+  11updateReleases:
     handler: handler.updateReleases
     events:
       - schedule: rate(1 hour)

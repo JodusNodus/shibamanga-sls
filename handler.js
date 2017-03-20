@@ -17,29 +17,17 @@ const idsStringToArr = idsString =>
 const handlerFactory = f =>
   (e, ctx, cb) => {
     const params = { ...e.pathParameters, ...e.queryStringParameters };
-    if (params.mangaid) {
-      params.mangaid = parseInt(params.mangaid, 10);
-    }
-    if (params.chapternum) {
-      params.chapternum = parseInt(params.chapternum, 10);
-    }
-    if (params.length) {
-      params.length = parseInt(params.length, 10);
-    }
-    if (params.page) {
-      params.page = parseInt(params.page, 10);
-    }
-    if (params.ids) {
-      params.ids = idsStringToArr(params.ids);
-    }
-    if (params.not_ids) {
-      params.notIds = idsStringToArr(params.not_ids);
-    }
+    if (params.mangaid) params.mangaid = parseInt(params.mangaid, 10);
+    if (params.chapternum) params.chapternum = parseInt(params.chapternum, 10);
+    if (params.length) params.length = parseInt(params.length, 10);
+    if (params.page) params.page = parseInt(params.page, 10);
+    if (params.ids) params.ids = idsStringToArr(params.ids);
+    if (params.not_ids) params.notIds = idsStringToArr(params.not_ids);
     f(params)
       .then((data) => {
         cb(null, {
           statusCode: 200,
-          body: data,
+          body: JSON.stringify(data),
         });
       })
       .catch((err) => {
