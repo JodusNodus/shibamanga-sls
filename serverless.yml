@@ -6,8 +6,8 @@ provider:
   stage: dev
   region: eu-central-1
   environment:
-    ELASTICSEACH_HOST: ${env:ELASTICSEACH_HOST}
-    ELASTICSEACH_INDEX: shibamanga
+    ELASTICSEARCH_HOST: ${env:ELASTICSEARCH_HOST}
+    ELASTICSEARCH_INDEX: shibamanga
 
 functions:
   1getManga:
