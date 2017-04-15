@@ -2,7 +2,7 @@ service: shibamanga
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
   stage: dev
   region: eu-central-1
   environment:
@@ -117,5 +117,5 @@ functions:
 plugins:
   - serverless-webpack
 
-custom:
-  webpackIncludeModules: true # enable auto-packing of external modules
+#custom:
+#  webpackIncludeModules: true # enable auto-packing of external modules

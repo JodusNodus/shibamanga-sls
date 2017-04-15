@@ -1,17 +1,20 @@
-const nodeExternals = require("webpack-node-externals");
+const path = require("path");
 
 module.exports = {
-  entry: "./handler.js",
+  entry: "./handler",
+  output: {
+    libraryTarget: "commonjs",
+    path: path.join(__dirname, "/.webpack"),
+    filename: "handler.js",
+  },
   target: "node",
+  resolve: {
+    extensions: [".ts", ".js", ".json", ""],
+  },
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        loaders: ["babel"],
-        include: __dirname,
-        exclude: /node_modules/,
-      },
+      { test: /\.ts$/, loader: "ts-loader" },
+      { test: /\.json$/, loader: "json-loader" },
     ],
   },
-  externals: [nodeExternals()],
 };
