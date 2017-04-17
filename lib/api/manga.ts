@@ -47,9 +47,8 @@ export default async function (props: { mangaid:number, isFresh?:boolean, source
   }
 
   if (chapterList.length < 1) {
-    const sourceInIndexItem = manga.sources.filter(
-      ({ sourceslug }) => sourceslug === manga.source,
-    )[0];
+    const sourceInIndexItem = manga.sources
+      .filter(({ sourceslug }) => sourceslug === manga.source)[0];
 
     if (!sourceInIndexItem) {
       return manga;

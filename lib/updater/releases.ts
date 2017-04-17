@@ -2,6 +2,7 @@ import elastic from "../elasticsearch";
 import { ELASTICSEARCH_INDEX } from "../constants";
 import composeReleaseId from "../utils/composeReleaseId";
 import { mangasources } from "../sources/index";
+import mangaApi from "../api/manga";
 
 import { ReleaseItem } from "../interfaces/releases";
 
@@ -43,6 +44,12 @@ async function putReleases(items:ReleaseItem[], sourceslug:string) {
   }
 }
 
+async function updateMangaChapterLists(items:ReleaseItem[], source:string){
+  for(const item of items){
+    await mangaApi({mangaid: item.mangaid, isFresh: true, source});
+  }
+}
+
 export default async function updateReleases() {
   for (const source of mangasources) {
     let items = await source.getReleases();
@@ -62,6 +69,8 @@ export default async function updateReleases() {
         return { ...release, mangaslug: undefined, mangaid };
       })
       .filter(x => x != null);
+    
+    await updateMangaChapterLists(items, source.name);
 
     await putReleases(items, source.name);
   }
