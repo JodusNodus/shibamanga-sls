@@ -61,6 +61,8 @@ const handlerFactory = (f:(params:object) => Promise<any>) => (e, ctx, cb) => {
           "Access-Control-Allow-Methods": "GET",
           "Strict-Transport-Security": "max-age=631138519",
           "X-Content-Type-Options": "nosniff",
+          "Cache-Control": "no-store, must-revalidate",
+          "Expires": "0",
         },
         body: JSON.stringify(data),
       });
